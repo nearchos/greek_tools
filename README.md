@@ -13,6 +13,8 @@ It can be used to transform Greek text to the equivalent using the Latin alphabe
 Simply use ``toGreeklish`` tp convert Greek text to Greeklish. Everything else is ignored.
 
 ```dart
+import 'package:greek_tools/greek_tools.dart';
+
 toGreeklish('Κόσμος'); // produces 'Kosmos'
 ```
 
