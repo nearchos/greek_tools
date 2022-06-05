@@ -1,6 +1,6 @@
 name: greek_tools
 description: A Dart library for manipulating Greek text - mainly transforming between Latin and Greek character sets.
-version: 1.0.1
+version: 1.0.3
 homepage: https://github.com/nearchos/greek_tools
 repository: https://github.com/nearchos/greek_tools
 

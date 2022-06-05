@@ -14,6 +14,18 @@ const List<String> greekWords = [
   "ΆΥΛΟΣ",
   "Αυλός",
   "ΑΥΛΌΣ",
+  "Αυγό",
+  "ΑΥΓΌ",
+  "Αβγό",
+  "ΑΒΓΌ",
+  "εύβοια",
+  "Εύβοια",
+  "νύξη",
+  "Νύξη",
+  "νύχι",
+  "Νύχι",
+  "ηύρε",
+  "Ηύρε",
   "Φαΐ",
   "ΦΑΪ",
   "ΞΎΠΝΗΜΑ",
@@ -44,6 +56,18 @@ const List<String> expectedGreeklishWordsSimplified = [
   "AYLOS",
   "Avlos",
   "AVLOS",
+  "Avgo",
+  "AVGO",
+  "Avgo",
+  "AVGO",
+  "evvoia",
+  "Evvoia",
+  "nyxi",
+  "Nyxi",
+  "nychi",
+  "Nychi",
+  "ivre",
+  "Ivre",
   "Fai",
   "FAI",
   "XYPNIMA",
@@ -74,6 +98,18 @@ const List<String> expectedGreeklishWordsWithAccents = [
   "ÁYLOS",
   "Avlós",
   "AVLÓS",
+  "Avgó",
+  "AVGÓ",
+  "Avgó",
+  "AVGÓ",
+  "évvoia",
+  "Évvoia",
+  "nýxī",
+  "Nýxī",
+  "nýchi",
+  "Nýchi",
+  "ī́vre",
+  "Ī́vre",
   "Faḯ",
   "FAÏ",
   "XÝPNĪMA",
@@ -92,94 +128,135 @@ const List<String> expectedGreeklishWordsWithAccents = [
 ];
 
 void main() {
-
   group('Greek Tools tests', () {
-
     setUp(() {
       // setup goes here.
     });
 
-    test('Test words',() {
+    test('Test words', () {
       bool succeed = true;
-      for(int i = 0; i < greekWords.length; i++) {
+      for (int i = 0; i < greekWords.length; i++) {
         final String greekWord = greekWords[i];
         final String greeklishWord = toGreeklish(greekWord);
         final bool match = greeklishWord == expectedGreeklishWordsSimplified[i];
-        print('$greekWord -> $greeklishWord [${expectedGreeklishWordsSimplified[i]} ] ${match ? "✓" : "✗"}');
+        print(
+            '$greekWord -> $greeklishWord [${expectedGreeklishWordsSimplified[i]} ] ${match ? "✓" : "✗"}');
         succeed &= match;
       }
       expect(succeed, true);
     });
 
-    test('Test words with accents',() {
+    test('Test words with accents', () {
       bool succeed = true;
-      for(int i = 0; i < greekWords.length; i++) {
+      for (int i = 0; i < greekWords.length; i++) {
         final String greekWord = greekWords[i];
         final String greeklishWord = toGreeklish(greekWord, withAccents: true);
-        final bool match = greeklishWord == expectedGreeklishWordsWithAccents[i];
-        print('$greekWord -> $greeklishWord [ ${expectedGreeklishWordsWithAccents[i]} ] ${match ? "✓" : "✗"}');
+        final bool match =
+            greeklishWord == expectedGreeklishWordsWithAccents[i];
+        print(
+            '$greekWord -> $greeklishWord [ ${expectedGreeklishWordsWithAccents[i]} ] ${match ? "✓" : "✗"}');
         succeed &= match;
       }
       expect(succeed, true);
     });
 
-    test('Test remove lower case accents',() {
-      final Map<String,String> testTexts = {};
-      testTexts["γειά σου κόσμε! ελπίζω να είναι όλα καλά."] = "γεια σου κοσμε! ελπιζω να ειναι ολα καλα.";
-      testTexts["Η διήθιση είναι ένα ασυνήθιστο ρήμα και το ύψιλον ένα ασυνήθιστο γράμμα."] = "Η διηθιση ειναι ενα ασυνηθιστο ρημα και το υψιλον ενα ασυνηθιστο γραμμα.";
-      testTexts["Τα αϊδόνια δεν σε αφήνουνε να κοιμηθείς στις Πλάτρες"] = "Τα αιδονια δεν σε αφηνουνε να κοιμηθεις στις Πλατρες";
-      testTexts["Έξω από την πόλη βρίσκονται τα δέντρα"] = "Έξω απο την πολη βρισκονται τα δεντρα";
+    test('Test remove lower case accents', () {
+      final Map<String, String> testTexts = {};
+      testTexts["γειά σου κόσμε! ελπίζω να είναι όλα καλά."] =
+          "γεια σου κοσμε! ελπιζω να ειναι ολα καλα.";
+      testTexts[
+              "Η διήθιση είναι ένα ασυνήθιστο ρήμα και το ύψιλον ένα ασυνήθιστο γράμμα."] =
+          "Η διηθιση ειναι ενα ασυνηθιστο ρημα και το υψιλον ενα ασυνηθιστο γραμμα.";
+      testTexts["Τα αϊδόνια δεν σε αφήνουνε να κοιμηθείς στις Πλάτρες"] =
+          "Τα αιδονια δεν σε αφηνουνε να κοιμηθεις στις Πλατρες";
+      testTexts["Έξω από την πόλη βρίσκονται τα δέντρα"] =
+          "Έξω απο την πολη βρισκονται τα δεντρα";
 
       bool succeed = true;
-      for(final String lowercaseTextWithAccents in testTexts.keys) {
-        final String lowercaseTextWithoutAccents = removeAccentsLowercase(lowercaseTextWithAccents);
-        final bool match = lowercaseTextWithoutAccents == testTexts[lowercaseTextWithAccents];
-        print('$lowercaseTextWithAccents -> $lowercaseTextWithoutAccents [${testTexts[lowercaseTextWithAccents]}] ${match ? "✓" : "✗"}');
+      for (final String lowercaseTextWithAccents in testTexts.keys) {
+        final String lowercaseTextWithoutAccents =
+            removeAccentsLowercase(lowercaseTextWithAccents);
+        final bool match =
+            lowercaseTextWithoutAccents == testTexts[lowercaseTextWithAccents];
+        print(
+            '$lowercaseTextWithAccents -> $lowercaseTextWithoutAccents [${testTexts[lowercaseTextWithAccents]}] ${match ? "✓" : "✗"}');
         succeed &= match;
       }
       expect(succeed, true);
     });
 
-    test('Test remove upper case accents',() {
-      final Map<String,String> testTexts = {};
-      testTexts["ΓΕΙΆ ΣΟΥ ΚΌΣΜΕ! ΕΛΠΊΖΩ ΝΑ ΕΊΝΑΙ ΌΛΑ ΚΑΛΆ."] = "ΓΕΙΑ ΣΟΥ ΚΟΣΜΕ! ΕΛΠΙΖΩ ΝΑ ΕΙΝΑΙ ΟΛΑ ΚΑΛΑ.";
-      testTexts["Η ΔΙΉΘΙΣΗ ΕΊΝΑΙ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΡΉΜΑ ΚΑΙ ΤΟ ΎΨΙΛΟΝ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΓΡΆΜΜΑ."] = "Η ΔΙΗΘΙΣΗ ΕΙΝΑΙ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΡΗΜΑ ΚΑΙ ΤΟ ΥΨΙΛΟΝ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΓΡΑΜΜΑ.";
-      testTexts["ΤΑ ΑΪΔΌΝΙΑ ΔΕΝ ΣΕ ΑΦΉΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΊΣ ΣΤΙΣ ΠΛΆΤΡΕΣ"] = "ΤΑ ΑΙΔΟΝΙΑ ΔΕΝ ΣΕ ΑΦΗΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΙΣ ΣΤΙΣ ΠΛΑΤΡΕΣ";
-      testTexts["ΈΞΩ ΑΠΌ ΤΗΝ ΠΌΛΗ ΒΡΊΣΚΟΝΤΑΙ ΤΑ ΔΈΝΤΡΑ"] = "ΕΞΩ ΑΠΟ ΤΗΝ ΠΟΛΗ ΒΡΙΣΚΟΝΤΑΙ ΤΑ ΔΕΝΤΡΑ";
+    test('Test remove upper case accents', () {
+      final Map<String, String> testTexts = {};
+      testTexts["ΓΕΙΆ ΣΟΥ ΚΌΣΜΕ! ΕΛΠΊΖΩ ΝΑ ΕΊΝΑΙ ΌΛΑ ΚΑΛΆ."] =
+          "ΓΕΙΑ ΣΟΥ ΚΟΣΜΕ! ΕΛΠΙΖΩ ΝΑ ΕΙΝΑΙ ΟΛΑ ΚΑΛΑ.";
+      testTexts[
+              "Η ΔΙΉΘΙΣΗ ΕΊΝΑΙ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΡΉΜΑ ΚΑΙ ΤΟ ΎΨΙΛΟΝ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΓΡΆΜΜΑ."] =
+          "Η ΔΙΗΘΙΣΗ ΕΙΝΑΙ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΡΗΜΑ ΚΑΙ ΤΟ ΥΨΙΛΟΝ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΓΡΑΜΜΑ.";
+      testTexts["ΤΑ ΑΪΔΌΝΙΑ ΔΕΝ ΣΕ ΑΦΉΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΊΣ ΣΤΙΣ ΠΛΆΤΡΕΣ"] =
+          "ΤΑ ΑΙΔΟΝΙΑ ΔΕΝ ΣΕ ΑΦΗΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΙΣ ΣΤΙΣ ΠΛΑΤΡΕΣ";
+      testTexts["ΈΞΩ ΑΠΌ ΤΗΝ ΠΌΛΗ ΒΡΊΣΚΟΝΤΑΙ ΤΑ ΔΈΝΤΡΑ"] =
+          "ΕΞΩ ΑΠΟ ΤΗΝ ΠΟΛΗ ΒΡΙΣΚΟΝΤΑΙ ΤΑ ΔΕΝΤΡΑ";
 
       bool succeed = true;
-      for(final String uppercaseTextWithAccents in testTexts.keys) {
-        final String uppercaseTextWithoutAccents = removeAccentsUppercase(uppercaseTextWithAccents);
-        final bool match = uppercaseTextWithoutAccents == testTexts[uppercaseTextWithAccents];
-        print('$uppercaseTextWithAccents -> $uppercaseTextWithoutAccents [${testTexts[uppercaseTextWithAccents]}] ${match ? "✓" : "✗"}');
+      for (final String uppercaseTextWithAccents in testTexts.keys) {
+        final String uppercaseTextWithoutAccents =
+            removeAccentsUppercase(uppercaseTextWithAccents);
+        final bool match =
+            uppercaseTextWithoutAccents == testTexts[uppercaseTextWithAccents];
+        print(
+            '$uppercaseTextWithAccents -> $uppercaseTextWithoutAccents [${testTexts[uppercaseTextWithAccents]}] ${match ? "✓" : "✗"}');
         succeed &= match;
       }
       expect(succeed, true);
     });
 
-    test('Test remove accents',() {
-      final Map<String,String> testTexts = {};
-      testTexts["ΓΕΙΆ ΣΟΥ ΚΌΣΜΕ! ΕΛΠΊΖΩ ΝΑ ΕΊΝΑΙ ΌΛΑ ΚΑΛΆ."] = "ΓΕΙΑ ΣΟΥ ΚΟΣΜΕ! ΕΛΠΙΖΩ ΝΑ ΕΙΝΑΙ ΟΛΑ ΚΑΛΑ.";
-      testTexts["Η ΔΙΉΘΙΣΗ ΕΊΝΑΙ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΡΉΜΑ ΚΑΙ ΤΟ ΎΨΙΛΟΝ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΓΡΆΜΜΑ."] = "Η ΔΙΗΘΙΣΗ ΕΙΝΑΙ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΡΗΜΑ ΚΑΙ ΤΟ ΥΨΙΛΟΝ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΓΡΑΜΜΑ.";
-      testTexts["ΤΑ ΑΪΔΌΝΙΑ ΔΕΝ ΣΕ ΑΦΉΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΊΣ ΣΤΙΣ ΠΛΆΤΡΕΣ"] = "ΤΑ ΑΙΔΟΝΙΑ ΔΕΝ ΣΕ ΑΦΗΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΙΣ ΣΤΙΣ ΠΛΑΤΡΕΣ";
-      testTexts["ΈΞΩ ΑΠΌ ΤΗΝ ΠΌΛΗ ΒΡΊΣΚΟΝΤΑΙ ΤΑ ΔΈΝΤΡΑ"] = "ΕΞΩ ΑΠΟ ΤΗΝ ΠΟΛΗ ΒΡΙΣΚΟΝΤΑΙ ΤΑ ΔΕΝΤΡΑ";
-      testTexts["γειά σου κόσμε! ελπίζω να είναι όλα καλά."] = "γεια σου κοσμε! ελπιζω να ειναι ολα καλα.";
-      testTexts["Η διήθιση είναι ένα ασυνήθιστο ρήμα και το ύψιλον ένα ασυνήθιστο γράμμα."] = "Η διηθιση ειναι ενα ασυνηθιστο ρημα και το υψιλον ενα ασυνηθιστο γραμμα.";
-      testTexts["Τα αϊδόνια δεν σε αφήνουνε να κοιμηθείς στις Πλάτρες"] = "Τα αιδονια δεν σε αφηνουνε να κοιμηθεις στις Πλατρες";
-      testTexts["Έξω από την πόλη βρίσκονται τα δέντρα"] = "Εξω απο την πολη βρισκονται τα δεντρα";
+    test('Test remove accents', () {
+      final Map<String, String> testTexts = {};
+      testTexts["ΓΕΙΆ ΣΟΥ ΚΌΣΜΕ! ΕΛΠΊΖΩ ΝΑ ΕΊΝΑΙ ΌΛΑ ΚΑΛΆ."] =
+          "ΓΕΙΑ ΣΟΥ ΚΟΣΜΕ! ΕΛΠΙΖΩ ΝΑ ΕΙΝΑΙ ΟΛΑ ΚΑΛΑ.";
+      testTexts[
+              "Η ΔΙΉΘΙΣΗ ΕΊΝΑΙ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΡΉΜΑ ΚΑΙ ΤΟ ΎΨΙΛΟΝ ΈΝΑ ΑΣΥΝΉΘΙΣΤΟ ΓΡΆΜΜΑ."] =
+          "Η ΔΙΗΘΙΣΗ ΕΙΝΑΙ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΡΗΜΑ ΚΑΙ ΤΟ ΥΨΙΛΟΝ ΕΝΑ ΑΣΥΝΗΘΙΣΤΟ ΓΡΑΜΜΑ.";
+      testTexts["ΤΑ ΑΪΔΌΝΙΑ ΔΕΝ ΣΕ ΑΦΉΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΊΣ ΣΤΙΣ ΠΛΆΤΡΕΣ"] =
+          "ΤΑ ΑΙΔΟΝΙΑ ΔΕΝ ΣΕ ΑΦΗΝΟΥΝΕ ΝΑ ΚΟΙΜΗΘΕΙΣ ΣΤΙΣ ΠΛΑΤΡΕΣ";
+      testTexts["ΈΞΩ ΑΠΌ ΤΗΝ ΠΌΛΗ ΒΡΊΣΚΟΝΤΑΙ ΤΑ ΔΈΝΤΡΑ"] =
+          "ΕΞΩ ΑΠΟ ΤΗΝ ΠΟΛΗ ΒΡΙΣΚΟΝΤΑΙ ΤΑ ΔΕΝΤΡΑ";
+      testTexts["γειά σου κόσμε! ελπίζω να είναι όλα καλά."] =
+          "γεια σου κοσμε! ελπιζω να ειναι ολα καλα.";
+      testTexts[
+              "Η διήθιση είναι ένα ασυνήθιστο ρήμα και το ύψιλον ένα ασυνήθιστο γράμμα."] =
+          "Η διηθιση ειναι ενα ασυνηθιστο ρημα και το υψιλον ενα ασυνηθιστο γραμμα.";
+      testTexts["Τα αϊδόνια δεν σε αφήνουνε να κοιμηθείς στις Πλάτρες"] =
+          "Τα αιδονια δεν σε αφηνουνε να κοιμηθεις στις Πλατρες";
+      testTexts["Έξω από την πόλη βρίσκονται τα δέντρα"] =
+          "Εξω απο την πολη βρισκονται τα δεντρα";
 
       bool succeed = true;
-      for(final String textWithAccents in testTexts.keys) {
+      for (final String textWithAccents in testTexts.keys) {
         final String textWithoutAccents = removeAccents(textWithAccents);
         final bool match = textWithoutAccents == testTexts[textWithAccents];
-        print('$textWithAccents -> $textWithoutAccents [${testTexts[textWithAccents]}] ${match ? "✓" : "✗"}');
+        print(
+            '$textWithAccents -> $textWithoutAccents [${testTexts[textWithAccents]}] ${match ? "✓" : "✗"}');
         succeed &= match;
       }
       expect(succeed, true);
     });
 
-    test('Test contains Greek',() {
-      final Map<String,bool> testTexts = {};
+    test('Test remove accents from Greeklish', () {
+      bool allGood = true;
+      for (int i = 0; i < expectedGreeklishWordsSimplified.length; i++) {
+        final String source = expectedGreeklishWordsWithAccents[i];
+        final String target = expectedGreeklishWordsSimplified[i];
+        String generated = removeAccentsFromGreeklish(source);
+        allGood = allGood && generated == target;
+        print(
+            '$source -> $generated [$target] ${(generated == target) ? "✓" : "✗"}');
+      }
+      expect(allGood, true);
+    });
+
+    test('Test contains Greek', () {
+      final Map<String, bool> testTexts = {};
       testTexts["γειά σου κόσμε! ελπίζω να είναι όλα καλά."] = true;
       testTexts["ΈΞΩ ΑΠΌ ΤΗΝ ΠΌΛΗ ΒΡΊΣΚΟΝΤΑΙ ΤΑ ΔΈΝΤΡΑ"] = true;
       testTexts["Mixed sentence with some English και μερικά Ελληνικά"] = true;
@@ -188,7 +265,7 @@ void main() {
       testTexts[""] = false; // empty text
 
       bool succeed = true;
-      for(final String text in testTexts.keys) {
+      for (final String text in testTexts.keys) {
         final bool hasGreek = containsGreek(text);
         final bool? expected = testTexts[text];
         final bool match = expected != null && expected == hasGreek;
@@ -197,6 +274,12 @@ void main() {
       }
       expect(succeed, true);
     });
+  });
 
+  test(
+      'Verify coverage by checking that all letters check either note 1 or note 2 but not both',
+      () {
+    print('Verify coverage of note1 and note2 for all letters');
+    expect(verifyCoverage(), true);
   });
 }
