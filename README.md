@@ -26,3 +26,5 @@ Developed in June 2022 by [Nearchos Paspallis](https://nearchos.github.io).
 
 This project is based on, and related to the Java version of
 [Greek Tools](https://github.com/nearchos/GreekTools/tree/master/src/test/java/com/aspectsense/greektools).
+
+This Dart library is available on pub.dev at [https://pub.dev/packages/greek_tools](https://pub.dev/packages/greek_tools)
