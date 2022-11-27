@@ -28,3 +28,9 @@ This project is based on, and related to the Java version of
 [Greek Tools](https://github.com/nearchos/GreekTools/tree/master/src/test/java/com/aspectsense/greektools).
 
 This Dart library is available on pub.dev at [https://pub.dev/packages/greek_tools](https://pub.dev/packages/greek_tools)
+
+To publish a new version, follow these steps:
+1. check with a dry run: `dart pub publish --dry-run`
+2. if everything is ok, proceed with publishing: `dart pub publish`
+
+For details see [https://dart.dev/tools/pub/publishing](https://dart.dev/tools/pub/publishing).
