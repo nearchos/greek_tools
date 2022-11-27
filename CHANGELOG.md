@@ -15,3 +15,11 @@
 
 - Improved example
 - Added function 'removeAccentsFromGreeklish'
+
+## 1.0.4
+
+- A correction plus improved comments, in the example
+
+## 1.0.5
+
+- A correction handling words consisting of only the exceptions reg. notes 1/2, e.g. 'ευ' or 'Αύ', etc. 

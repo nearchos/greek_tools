@@ -41,6 +41,8 @@ const List<String> greekWords = [
   "ΕΥΘΕΊΑ",
   "Ευθεία",
   "Αυτή είναι μια δοκιμαστική πρόταση. Είναι καλή;",
+  "αύ",
+  "ΕΥ",
 ];
 
 const List<String> expectedGreeklishWordsSimplified = [
@@ -83,6 +85,8 @@ const List<String> expectedGreeklishWordsSimplified = [
   "EFTHEIA",
   "Eftheia",
   "Afti einai mia dokimastiki protasi. Einai kali?",
+  "av",
+  "EV",
 ];
 
 const List<String> expectedGreeklishWordsWithAccents = [
@@ -125,6 +129,8 @@ const List<String> expectedGreeklishWordsWithAccents = [
   "EFTHEÍA",
   "Eftheía",
   "Aftī́ eínai mia dokimastikī́ prótasī. Eínai kalī́?",
+  "áv",
+  "EV"
 ];
 
 void main() {

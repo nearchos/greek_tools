@@ -5,26 +5,28 @@ import 'package:greek_tools/greek_tools.dart';
 /// Based on ISO 843 standard (which is identical to ELOT 743).
 ///
 void main() {
-  /// convert a string containing Greek to the equivalent with Latin letters
+  // convert a string containing Greek to the equivalent with Latin letters
   print(toGreeklish('Γειά σου Κόσμε')); // prints 'Geia sou Kosme'
 
+  // optionally, set [withAccents] to output Greeklish with accents
   String greeklish = toGreeklish('Γειά σου Κόσμε', withAccents: true);
   print(greeklish); // prints 'Geiá sou Kósme'
 
-  print('You can check if a given word is in all-capital Greek letters:');
+  // You can check if a given word is in all-capital Greek letters
   print(isGreekWordInAllCaps('Όχι Όλα Κεφαλαία')); // prints 'false'
 
-  print('There is the option to remove the accents from text.');
-  print('This could be useful if you need to normalize text before searching.');
+  // There is the option to remove the accents from text.
+  // This could be useful if you need to normalize text before searching.
   print(removeAccents('Επίθετο, Όνομα')); // prints 'Επιθετο, Ονομα'
 
-  print('There is also the option to remove the accents from Greeklish text.');
-  print('Again, this could be useful for searching.');
-  print(removeAccents('Énas Kósmos')); // prints 'Enas Kosmos'
+  // There is also the option to remove the accents from Greeklish text.
+  // Again, this could be useful for searching.
+  print(removeAccentsFromGreeklish('Énas Kósmos')); // prints 'Enas Kosmos'
 
-  print('Last, you can check if a string contains Greek. This function returns'
-      ' true if at least one of the input characters is of the Greek alphabet.');
-  print(containsGreek('λέξη')); // prints 'true'
+  // Last, you can check if a string contains Greek. This function returns
+  // true if at least one of the input characters is of the Greek alphabet.
+  print(containsGreek('word in Greek is λέξη')); // prints 'true'
+  print(containsGreek('no Greek here')); // prints 'φαλσε'
 
   /// You can see all the available functions with their documentation in the
   /// "src/greeklish.dart" file.

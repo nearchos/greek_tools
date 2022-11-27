@@ -100,6 +100,7 @@ const Map<String, String> mappingWithAccents = {
   "ώ": "ṓ"
 };
 
+// e.g. av "before vowels or voiced consonants" and af "before voiceless consonants and word-finally"
 const Map<String, List<String>> exceptionsNotes_1_2 = {
   "ΑΥ": ["AV", "AF"],
   "Αυ": ["Av", "Af"],
@@ -145,6 +146,7 @@ const Map<String, String> exceptions = {
   "ντ": "nt",
 };
 
+// e.g. áv "before vowels or voiced consonants" and áf "before voiceless consonants and word-finally"
 const Map<String, List<String>> exceptionsWithAccentsNotes_1_2 = {
   "ΑΎ": ["ÁV", "ÁF"],
   "Αύ": ["Áv", "Áf"],
@@ -217,6 +219,10 @@ String toGreeklish(final String greek, {final bool withAccents = false}) {
 ///
 String toGreeklishWord(final String greekWord,
     {final bool withAccents = false}) {
+// handle words that match any of the exceptions
+  if(withAccents && exceptionsWithAccentsNotes_1_2.containsKey(greekWord)) return exceptionsWithAccentsNotes_1_2[greekWord]![0];
+  if(exceptionsNotes_1_2.containsKey(greekWord)) return exceptionsNotes_1_2[greekWord]![0];
+
   String greeklishWord = greekWord;
 // handle words starting with ΜΠ, Μπ, μπ
   {
@@ -228,7 +234,7 @@ String toGreeklishWord(final String greekWord,
       greeklishWord = greeklishWord.replaceFirst(RegExp('μπ'), "b");
     }
   }
-// first handle exceptional cases under notes 1, 2 - with accents ...
+// handle exceptional cases under notes 1, 2 - with accents ...
   if (withAccents) {
     for (final String exceptionKey in exceptionsWithAccentsNotes_1_2.keys) {
       final List<String>? exceptionValues =
@@ -254,6 +260,7 @@ String toGreeklishWord(final String greekWord,
       int index;
       while ((index = greeklishWord.indexOf(exceptionKey)) != -1) {
         final bool endOfWord =
+            greeklishWord.length == exceptionKey.length ||
             index == greeklishWord.length - exceptionKey.length - 1;
         final bool note1 = !endOfWord &&
             _checkNote1(greeklishWord[index + exceptionKey.length]);
