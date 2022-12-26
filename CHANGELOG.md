@@ -22,4 +22,8 @@
 
 ## 1.0.5
 
-- A correction handling words consisting of only the exceptions reg. notes 1/2, e.g. 'ευ' or 'Αύ', etc. 
+- A correction handling words consisting of only the exceptions reg. notes 1/2, e.g. 'ευ' or 'Αύ', etc. ## 1.0.5
+
+## 1.0.6
+
+- Minor fix for words falling in the exceptions reg. notes 1/2 but not ending the word, e.g. 'ευα' or 'Εύα', etc. 

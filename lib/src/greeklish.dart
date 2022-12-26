@@ -243,7 +243,7 @@ String toGreeklishWord(final String greekWord,
       int index;
       while ((index = greeklishWord.indexOf(exceptionKey)) != -1) {
         final bool endOfWord =
-            index == greeklishWord.length - exceptionKey.length - 1;
+            index == greeklishWord.length - exceptionKey.length;
         final bool note1 = !endOfWord &&
             _checkNote1(greeklishWord[index + exceptionKey.length]);
         // no need to check note 2 because they are complementary
@@ -261,7 +261,7 @@ String toGreeklishWord(final String greekWord,
       while ((index = greeklishWord.indexOf(exceptionKey)) != -1) {
         final bool endOfWord =
             greeklishWord.length == exceptionKey.length ||
-            index == greeklishWord.length - exceptionKey.length - 1;
+            index == greeklishWord.length - exceptionKey.length;
         final bool note1 = !endOfWord &&
             _checkNote1(greeklishWord[index + exceptionKey.length]);
         greeklishWord = greeklishWord.replaceAll(
